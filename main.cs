@@ -7,22 +7,15 @@ using System.Threading.Tasks;
 namespace ConsoleApp1 {
     class Program {
         static void Main(string[] args) {
-            string s = Console.ReadLine();
-            Dictionary<char, Int16> letters = new Dictionary<char, Int16>();
-            bool check = false;
-            foreach(var i in s) {
-                if (letters.ContainsKey(i)) {
-                    check = true;
-                    letters[i] += 1;
-                    Console.WriteLine("Deja Vu");
-                    break;
-                } else {
-                    letters.Add(i, 1);
+            int o = Convert.ToInt32(Console.ReadLine());
+            int sum = 0;
+            for(int i = 0; i < o; ++i) {
+                int temp = Convert.ToInt32(Console.ReadLine());
+                if (temp % 2 == 0) {
+                    sum += temp;
                 }
             }
-            if(check == false) {
-                Console.WriteLine("Unique");
-            }
+            Console.WriteLine(sum);
 
         }
     }
