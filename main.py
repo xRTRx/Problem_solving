@@ -1,8 +1,7 @@
-import re
-
 if __name__ == '__main__':
     # string = input()
-    string = "H#i w@hat7s yo0u&r n@a$me?"
-    string = re.sub('[^a-zA-Z0-9 \n]', '', string)
+    string = "I have 2 apples and 4 bananas"
+    for i in range(10, 0, -1):
+        string = string.replace(str(i), ['zero', 'one', 'two', 'three', 'four', 'five',
+                                         'six', 'seven', 'eight', 'nine', 'ten'][i])
     print(string)
-
