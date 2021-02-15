@@ -1,15 +1,17 @@
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
 int main(int argc, char *argv[]){
-    string s;
-	getline(cin, s); //spaces aren't ignoring
-	//removing special characters
-  	s.erase(remove_if(s.begin(), s.end(), [](char c){
-  	  		if (c == ' ') { return false; }
-  	  		else { return !isalnum(c);	  }  		}), s.end());
-  	cout << s;
+    string s("Hello 2 World");
+    string letters = {"abcdefghijklmnopqrstuvwxyz"};
+    for (size_t i = 0; i < s.size(); i++){
+        s[i] = tolower(s[i]);
+        if (s[i] == ' ' || !isalpha(s[i])) // skipping spaces and numbers
+            continue;
+        else
+            s.replace(i, 1, string(1, letters[25 - letters.find(s[i])]));
+    }
+  cout << s;
     return 0;
 }
