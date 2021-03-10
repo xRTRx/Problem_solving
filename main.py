@@ -1,13 +1,12 @@
-import math
+def spell(txt):
+    if len(txt) == 1:
+        print(txt)
+    else:
+        print(txt[-1])
+        return spell(txt[:-1])
+
 
 if __name__ == '__main__':
-    # name = input()
-    # inspectors = int(input())
-    # string = input().split()
-    inspectors = 2
-    name = "Artur"
-    string = "Eric Max Alex Anakin Tom Samuel".split()
-    string.append(name)
-    string.sort()
-    result = math.ceil((string.index(name) + 1) / inspectors) * 20
-    print(result)
+    txt = input()
+    spell(txt)
+    
