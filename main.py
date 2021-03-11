@@ -1,12 +1,10 @@
-def spell(txt):
-    if len(txt) == 1:
-        print(txt)
-    else:
-        print(txt[-1])
-        return spell(txt[:-1])
-
 
 if __name__ == '__main__':
     txt = input()
-    spell(txt)
-    
+    dict = {}
+    for i in text:
+        if i in dict:
+            dict[i] += 1
+        else:
+            dict[i] = 1
+    print(dict)
