@@ -1,21 +1,38 @@
-data = {
-    "100-90": 25, "42-01": 48, "55-09": 12, "128-64": 71, "002-22": 18, "321-54": 19, "097-32": 33, "065-135": 64,
-    "99-043": 80, "111-99": 11, "123-019": 5, "109-890": 72, "132-123": 27, "32-908": 27, "008-09": 25,
-    "055-967": 35, "897-99": 44, "890-98": 56, "344-32": 65, "43-955": 59, "001-233": 9, "089-111": 15,
-    "090-090": 17, "56-777": 23, "44-909": 27, "13-111": 21, "87-432": 15, "87-433": 14, "87-434": 23, "87-435": 11,
-    "87-436": 12, "87-437": 16, "94-121": 15, "94-122": 35, "80-089": 10, "87-456": 8, "87-430": 40
-}
+class Stack:
+    def __init__(self):
+        self.__stack = list()
+
+    def push(self, item):
+        self.__stack.append(item)
+
+    def pop(self):
+        try:
+            self.__stack.pop()
+        except IndexError:
+            pass
+
+    def size(self):
+        return len(self.__stack)
+
+
+def balanced(expression):
+    s = Stack()
+    count = 0
+    for i in expression:
+        if i == '(':
+            s.push(i)
+            count += 1
+        elif i == ')':
+            s.pop()
+            count -= 1
+    if s.size() == 0 and count == 0:
+        return True
+    else:
+        return False
+
 
 if __name__ == '__main__':
-    age = int(input())
-    total_new, total_original = 0, 0
-    for i in data.values():
-        if i < 18:
-            total_original += 5
-        else:
-            total_original += 20
-        if i < age:
-            total_new += 5
-        else:
-            total_new += 20
-    print(int((total_new-total_original)/total_original*100))
+    print(balanced(input()))
+    print(balanced("(a() eee))"))
+    print(balanced("(x=y)+(ky+io(4))"))
+    print(balanced("5(o(oo))) 9("))
