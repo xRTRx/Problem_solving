@@ -1,30 +1,52 @@
 #include <iostream>
-#include <map>
 #include <string>
+#include <exception>
 using namespace std;
 
-class Solution {
+/* Define the exception here */
+class BadLengthException : public exception {
  public:
-  bool isIsomorphic(const string &s, const string &t) {
-    for (int i = 0; i < s.size(); ++i) {
-      ms.emplace(s[i], t[i]);
-      mt.emplace(t[i], s[i]);
-    }
-    for (int i = 0; i < s.size(); ++i) {
-      if (t[i] != ms.at(s[i]) || s[i] != mt.at(t[i])) return false;
-    }
-    return true;
+  explicit BadLengthException(int n){
+    m[0] = '0' + n;
+    m[1] = '\0';
   }
-
+  virtual const char* what() const noexcept{
+    return m;
+  }
  private:
-  map<char, char> ms, mt;
+  char m[2];
 };
 
+
+bool checkUsername(string username) {
+	bool isValid = true;
+	int n = username.length();
+	if(n < 5) {
+		throw BadLengthException(n);
+	}
+	for(int i = 0; i < n-1; i++) {
+		if(username[i] == 'w' && username[i+1] == 'w') {
+			isValid = false;
+		}
+	}
+	return isValid;
+}
+
 int main() {
-  Solution s;
-  cout << s.isIsomorphic("badc", "baba");
-  //  cout << s.isIsomorphic("bar", "foo");
-  //  cout << s.isIsomorphic("paper", "title");
-  //  cout << s.isIsomorphic("egg", "add");
-  return 0;
+	int T; cin >> T;
+	while(T--) {
+		string username;
+		cin >> username;
+		try {
+			bool isValid = checkUsername(username);
+			if(isValid) {
+				cout << "Valid" << '\n';
+			} else {
+				cout << "Invalid" << '\n';
+			}
+		} catch (BadLengthException e) {
+			cout << "Too short: " << e.what() << '\n';
+		}
+	}
+	return 0;
 }
